@@ -1,9 +1,39 @@
 
 ;
 Level 2.iml,b\8\b848dd35a24e7908f42dffb0b0f34ff5d40fffbe
-I
-src/Assignment2Part6.java,4\0\40139562309bcbc169c214ce349a9ca7c481e4f8
-I
-src/Assignment2Part3.java,7\0\70c481526923db793160b6949cec06c7f110d04c
-I
-src/Assignment2Part2.java,2\7\2733edc10a64cba034675f01ba6d4f1f1aac8c1c
+u
+Esrc/com/shpp/p2p/cs/rmiroshnichenko/assignment2/Assignment2Part1.java,2\d\2dbf6854e6d93336855b0993f7f6e3d02e89cb96
+u
+Esrc/com/shpp/p2p/cs/rmiroshnichenko/assignment2/Assignment2Part2.java,6\0\60303493b6b80ab9c7d22800eff4186e1c2c1e6e
+u
+Esrc/com/shpp/p2p/cs/rmiroshnichenko/assignment2/Assignment2Part3.java,6\5\65b1c72c71818f6fa9a4c0de06fa194d4e605279
+u
+Esrc/com/shpp/p2p/cs/rmiroshnichenko/assignment2/Assignment2Part4.java,f\6\f62e8ac00168b326e40521214109c8af1413dc83
+u
+Esrc/com/shpp/p2p/cs/rmiroshnichenko/assignment2/Assignment2Part5.java,f\a\fa78b2541b0529044929ddabf7a2bd6cc8358a1e
+u
+Esrc/com/shpp/p2p/cs/rmiroshnichenko/assignment2/Assignment2Part6.java,a\b\ab899f305b254b3b4674e91f4f9a4b6ac871a228
+l
+<src/com/shpp/p2p/cs/rorlov/assignment2/Assignment2Part2.java,7\4\7484928172dec232a46cdc60cbabdc8d2950cfbb
+l
+<src/com/shpp/p2p/cs/rorlov/assignment2/Assignment2Part6.java,a\4\a4ff9382b837498aa82cc68979466ca74f490ef6
+l
+<src/com/shpp/p2p/cs/rorlov/assignment2/Assignment2Part5.java,3\a\3a5a81436aba896f415d145b2228af1ccf5c6080
+l
+<src/com/shpp/p2p/cs/rorlov/assignment2/Assignment2Part4.java,1\2\126bf778fe025dcaa5ac2b6a74a2bc2274e65a02
+l
+<src/com/shpp/p2p/cs/rorlov/assignment2/Assignment2Part3.java,e\a\eab95bcdcb76a7832d676a921fd2bd53cca98d11
+l
+<src/com/shpp/p2p/cs/rorlov/assignment2/Assignment2Part1.java,6\5\65e016f3df1250620fdc0661f546df65a9a6f3c7
+n
+>src/com/shpp/p2p/cs/afedorov/assignment2/Assignment2Part4.java,a\0\a072ef151316b3880b6dfb24a8f6ed855a9017f0
+n
+>src/com/shpp/p2p/cs/afedorov/assignment2/Assignment2Part1.java,5\9\59f12e44d86ae0bf7f91deaf01f3f74eb2cce41b
+n
+>src/com/shpp/p2p/cs/afedorov/assignment2/Assignment2Part2.java,8\9\896be1c4948ff0268f4c81d9b1c8ecced8e64411
+n
+>src/com/shpp/p2p/cs/afedorov/assignment2/Assignment2Part6.java,9\1\910cb14db21fe8ebfdfaeb4137b3a483d2695ffa
+n
+>src/com/shpp/p2p/cs/afedorov/assignment2/Assignment2Part5.java,e\8\e8208bcc7a1dec4ecdef60776c342afc6ec5f4ba
+n
+>src/com/shpp/p2p/cs/afedorov/assignment2/Assignment2Part3.java,3\8\382fe38532bcb5d14853415116938bf7530a3cfd

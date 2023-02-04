@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public class Assignment2Part5 extends WindowProgram {
     /* The number of rows and columns in the grid, respectively. */
-    private static final int NUM_COLS = 5;
-    private static final int  NUM_ROWS = 6;
+    private static final int NUM_RECT_IN_COL = 7;
+    private static final int NUM_RECT_ROWS = 6;
     /* The width and height of each box. */
     private static final double BOX_SIZE = 40;
     /* The horizontal and vertical spacing between the boxes. */
@@ -18,7 +18,7 @@ public class Assignment2Part5 extends WindowProgram {
 
     public void run() {
 
-        drawFullBord(NUM_ROWS, NUM_COLS);
+        drawFullBord(NUM_RECT_ROWS, NUM_RECT_IN_COL);
     }
 
     /**
@@ -27,7 +27,7 @@ public class Assignment2Part5 extends WindowProgram {
      * @param numCols I did indent between rows within increase numCols that descends on y axes.
      */
     private void drawFullBord(int numRows, int numCols) {
-        for (int i = 0; i < NUM_COLS; i ++){
+        for (int i = 0; i < NUM_RECT_IN_COL; i ++){
             drawRow(numRows, numCols);
             numCols = (int) (numCols + (BOX_SIZE+BOX_SPACING));
         }
@@ -38,7 +38,7 @@ public class Assignment2Part5 extends WindowProgram {
      * @param numCols
      */
     private void drawRow(int numRows, int numCols) {
-        for (int i = 0; i < NUM_ROWS; i++) {
+        for (int i = 0; i < NUM_RECT_ROWS; i++) {
             createRect(numRows,numCols);
             numRows = (int) (numRows + (BOX_SIZE + BOX_SPACING));
         }
@@ -50,8 +50,8 @@ public class Assignment2Part5 extends WindowProgram {
      * @param colNumber
      */
     private void createRect( int rowNumber, int colNumber) {
-        GRect rect = new GRect(getWidth()/2-(BOX_SPACING+BOX_SIZE)*NUM_ROWS/2 + rowNumber,
-                getHeight()/2-(BOX_SPACING+BOX_SIZE)*NUM_COLS/2 + colNumber,
+        GRect rect = new GRect(getWidth()/2-(BOX_SPACING+BOX_SIZE)* NUM_RECT_ROWS /2 + rowNumber,
+                getHeight()/2-(BOX_SPACING+BOX_SIZE)* NUM_RECT_IN_COL /2 + colNumber,
                 BOX_SIZE, BOX_SIZE);
         rect.setFilled(true);
         rect.setFillColor(Color.BLACK);

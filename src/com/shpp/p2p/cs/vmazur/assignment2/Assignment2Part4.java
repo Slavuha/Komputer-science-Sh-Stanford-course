@@ -11,11 +11,12 @@ import java.awt.*;
  */
 
 public class Assignment2Part4 extends WindowProgram {
-     private static final int RECT_WIGHT = 200;
-     private static final int RECT_HIGHT = 300;
+    private static final int RECT_WIGHT = 100;
+    private static final int RECT_HIGHT = 400;
+
     public void run() {
-    creteTheFlagOfOrangutaniya();
-    createTittle();
+        createTheFlagOfOrangutaniya();
+        createTittle();
     }
 
     /**
@@ -26,30 +27,34 @@ public class Assignment2Part4 extends WindowProgram {
         GLabel label = new GLabel("FLAG OF GOLODNII ORANGUTANGI ");
         label.setColor(Color.GREEN);
         double width = label.getWidth();
-        label.setLocation(getWidth()-width, getHeight()
-         - label.getDescent());
+        label.setLocation(getWidth() - width, getHeight()
+                - label.getDescent());
         add(label);
     }
+
     /**
      * This method create the flag through create three rect in a for cycle
      * Also I add flag to blue color
      */
-    private void creteTheFlagOfOrangutaniya() {
-            boolean blue = true;
-            int x = getWidth()/2-RECT_WIGHT-RECT_WIGHT/2;
-            int y = getHeight()/2-RECT_HIGHT/2;
-        for (int i = 0; i<3; i++) {
+    private void createTheFlagOfOrangutaniya() {
+
+        boolean blue = true;
+        int x = getWidth() / 2 - RECT_WIGHT - RECT_WIGHT / 2;
+        int y = getHeight() / 2 - RECT_HIGHT / 2;
+        for (int i = 0; i < 3; i++) {
             creteRect(x, y, blue);
+
             blue = !blue;
             x = x + RECT_WIGHT;
         }
     }
 
+
     /**
      * Create rect
+     *
      * @param x
-     * @param y
-     * @param blue exclude two blue together
+     * @param y //* @param blue exclude two blue together
      */
     private void creteRect(int x, int y, boolean blue) {
         GRect rect = new GRect(
@@ -57,7 +62,8 @@ public class Assignment2Part4 extends WindowProgram {
                 y,
                 RECT_WIGHT, RECT_HIGHT);
         rect.setFilled(true);
-        rect.setFillColor(blue? Color.GREEN : Color.BLUE);
+        rect.setFillColor(
+                blue ? Color.GREEN : Color.BLUE);
         add(rect);
     }
 }

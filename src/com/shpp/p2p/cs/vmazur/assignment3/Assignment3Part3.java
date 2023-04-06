@@ -33,6 +33,7 @@ public class Assignment3Part3 extends TextProgram {
             for (int i = 1; i <= exponent; i++) {
                 result = result * base;
             }
+           // in case 0
             result = 1 / result;
         }
         return result;

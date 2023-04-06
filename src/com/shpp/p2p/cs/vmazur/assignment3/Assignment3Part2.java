@@ -3,6 +3,7 @@ package com.shpp.p2p.cs.vmazur.assignment3;
 import com.shpp.cs.a.console.TextProgram;
 
 /**
+ * Integer to the run
  * Class start program with numbers
  */
 public class Assignment3Part2 extends TextProgram {

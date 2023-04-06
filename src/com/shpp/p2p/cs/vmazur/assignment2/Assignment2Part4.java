@@ -37,14 +37,24 @@ public class Assignment2Part4 extends WindowProgram {
      * Also I add flag to blue color
      */
     private void createTheFlagOfOrangutaniya() {
-
-        boolean blue = true;
+        Color color = Color.green;
+     //   boolean blue = true;
         int x = getWidth() / 2 - RECT_WIGHT - RECT_WIGHT / 2;
         int y = getHeight() / 2 - RECT_HIGHT / 2;
         for (int i = 0; i < 3; i++) {
-            creteRect(x, y, blue);
 
-            blue = !blue;
+            switch (i){
+                case 0 -> color = Color.green;
+                case 1 -> color = Color.RED;
+                case 2 -> color = Color.PINK;
+
+            }
+            creteRect(x, y,
+            //        blue
+                    color
+            );
+
+          //  blue = !blue;
             x = x + RECT_WIGHT;
         }
     }
@@ -56,14 +66,19 @@ public class Assignment2Part4 extends WindowProgram {
      * @param x
      * @param y //* @param blue exclude two blue together
      */
-    private void creteRect(int x, int y, boolean blue) {
+    private void creteRect(int x, int y,
+                           //boolean blue
+                           Color color
+    )
+    {
         GRect rect = new GRect(
                 x,
                 y,
                 RECT_WIGHT, RECT_HIGHT);
         rect.setFilled(true);
-        rect.setFillColor(
-                blue ? Color.GREEN : Color.BLUE);
+        rect.setFillColor(color
+        //        blue ? Color.GREEN : Color.BLUE
+        );
         add(rect);
     }
 }

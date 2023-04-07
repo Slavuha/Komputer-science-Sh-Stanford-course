@@ -90,6 +90,14 @@ public class Breakout extends WindowProgram {
         GOval ball = createBall();
         add(ball);
         moveBall(ball);
+        test();
+    }
+
+     private void test() {
+
+        GObject gObject = getElementAt(getWidth() / 2, getHeight() / 2);
+        add(gObject);
+        gObject.move(0, 0);
 
 
 
@@ -98,31 +106,55 @@ public class Breakout extends WindowProgram {
 
     }
 
-    private void moveBall(GOval ball){
+    private GOval moveBall(GOval ball) {
 
         RandomGenerator rgen = RandomGenerator.getInstance();
         vx = rgen.nextDouble(1.0, 3.0);
         vy = 3;
+        if (rgen.nextBoolean(0.5))
+            vx = -vx;
+
         while (true) {
-
-            if (rgen.nextBoolean(0.5))
-                vx = -vx;
-
-            ball.move(vx, vy);
+     //       ball.move(vx, vy);
             pause(PAUSE_TIME);
+
+            if(getCollidingObjectPaddle(ball)){
+       //        vy = - vy;
+            }
+
+            if (ball.getY() > (getHeight() - BALL_RADIUS)
+                    || ball.getY() < 0) {
+                vy = -vy;
+            }
+            if (ball.getX() < 0
+                    || (ball.getX() > getWidth() - BALL_RADIUS)) {
+                vx = -vx;
+            }
+        }
+    }
+
+    private boolean getCollidingObjectPaddle(GOval ball) {
+        if (1==1
+
+
+
+        )
+        return true;
+        else {
+            return false;
         }
     }
 
     private GOval createBall() {
         GOval gOval = new GOval(
-                getWidth()/2 - BALL_RADIUS/2,
-                getHeight()/2 - BALL_RADIUS/2,
+                getWidth() / 2 - BALL_RADIUS / 2,
+                getHeight() / 2 - BALL_RADIUS / 2,
                 BALL_RADIUS,
                 BALL_RADIUS
         );
         gOval.setFilled(true);
         gOval.setColor(Color.RED);
-     //   add(gOval);
+        //   add(gOval);
         return gOval;
     }
 
@@ -168,6 +200,7 @@ public class Breakout extends WindowProgram {
 
     }
 }
+
 
 
 

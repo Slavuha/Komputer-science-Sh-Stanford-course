@@ -80,33 +80,34 @@ public class Breakout extends WindowProgram {
     /**
      * Number of turns
      */
-    private static final int NTURNS = 3;
+    private
+    static
+
+    //final
+            int NTURNS = 3;
 
     public void run() {
         /* You fill this in, along with any subsidiary methods */
         setSize(WIDTH, HEIGHT);
-        createPaddle();
+        // createPaddle();
         addMouseListeners();
         GOval ball = createBall();
         add(ball);
         moveBall(ball);
-        test();
-    }
-
-     private void test() {
-
-        GObject gObject = getElementAt(getWidth() / 2, getHeight() / 2);
-        add(gObject);
-        gObject.move(0, 0);
-
-
-
-//        System.out.println(" Width is " + getWidth());
-//        System.out.println(" Height is " + getHeight());
 
     }
 
-    private GOval moveBall(GOval ball) {
+
+    private void moveBall(GOval ball) {
+        GRect gRect = new GRect(
+                getWidth() / 2 - PADDLE_WIDTH / 2,
+                getHeight() - PADDLE_Y_OFFSET - 10,
+                PADDLE_WIDTH,
+                PADDLE_HEIGHT);
+
+        gRect.setFilled(true);
+        gRect.setColor(Color.GREEN);
+        add(gRect);
 
         RandomGenerator rgen = RandomGenerator.getInstance();
         vx = rgen.nextDouble(1.0, 3.0);
@@ -114,35 +115,49 @@ public class Breakout extends WindowProgram {
         if (rgen.nextBoolean(0.5))
             vx = -vx;
 
-        while (true) {
-     //       ball.move(vx, vy);
+        while (NTURNS > 0) {
+            ball.move(vx, vy);
             pause(PAUSE_TIME);
 
-            if(getCollidingObjectPaddle(ball)){
-       //        vy = - vy;
+            GObject collider = getCollidingObject(ball.getX(), ball.getY());
+
+            //     GObject collider = getCollidingObject();
+            if (collider == gRect) {
+
+
+                vy = -vy;
             }
 
-            if (ball.getY() > (getHeight() - BALL_RADIUS)
-                    || ball.getY() < 0) {
+            if (
+//                    ball.getY() > (getHeight() - BALL_RADIUS)
+//                    ||
+                    ball.getY() < 0
+            ) {
                 vy = -vy;
             }
             if (ball.getX() < 0
-                    || (ball.getX() > getWidth() - BALL_RADIUS)) {
+                    || (ball.getX() > getWidth() - BALL_RADIUS)
+            ) {
                 vx = -vx;
+            }
+            if (ball.getY() > (getHeight() - BALL_RADIUS)) {
+                NTURNS = NTURNS - 1;
+                System.out.println(NTURNS);
             }
         }
     }
 
-    private boolean getCollidingObjectPaddle(GOval ball) {
-        if (1==1
+
+    private GObject getCollidingObject(double x, double y) throws NullPointerException {
+        GObject gObject = getElementAt(x, y);
+        try {
 
 
-
-        )
-        return true;
-        else {
-            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return gObject;
+
     }
 
     private GOval createBall() {

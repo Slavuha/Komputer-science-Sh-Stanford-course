@@ -88,12 +88,42 @@ public class Breakout extends WindowProgram {
 
     public void run() {
         /* You fill this in, along with any subsidiary methods */
-        setSize(WIDTH, HEIGHT);
+//        setSize(WIDTH, HEIGHT);
+        createBriks(NBRICKS_PER_ROW, NBRICK_ROWS);
         // createPaddle();
         addMouseListeners();
         GOval ball = createBall();
         add(ball);
         moveBall(ball);
+
+    }
+
+    private void createBriks(int x, int y) {
+
+        for (int i = 0; i < NBRICK_ROWS; i++) {
+            createBrikRow(x, y);
+            y = y + BRICK_HEIGHT + BRICK_SEP;
+        }
+    }
+
+    private void createBrikRow(int x, int y) {
+        for (int i = 0; i < NBRICKS_PER_ROW; i++) {
+
+            createBrik(x, y);
+            x = x + BRICK_WIDTH + BRICK_SEP;
+        }
+    }
+
+    private void createBrik(int x, int y) {
+        GRect gRect = new GRect(
+                x+ 0,
+                y+ BRICK_Y_OFFSET,
+                BRICK_WIDTH,
+                BRICK_HEIGHT
+        );
+        gRect.setFilled(true);
+        gRect.setColor(Color.RED);
+        add(gRect);
 
     }
 
@@ -149,7 +179,9 @@ public class Breakout extends WindowProgram {
 
 
     private GObject getCollidingObject(double x, double y) throws NullPointerException {
-        GObject gObject = getElementAt(x, y);
+          GObject gObject =
+                  getElementAt(x, y);
+        //        chekAllPoints(x, y);
         try {
 
 
@@ -158,6 +190,14 @@ public class Breakout extends WindowProgram {
         }
         return gObject;
 
+    }
+
+    private GObject chekAllPoints(double x, double y) {
+        GObject gObject  = getElementAt(x, y);
+        return gObject;
+
+//        gObject = getElementAt(x+BALL_RADIUS, y);
+//        return gObject;
     }
 
     private GOval createBall() {

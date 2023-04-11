@@ -8,12 +8,19 @@ import com.shpp.cs.a.graphics.WindowProgram;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-
+//kode wrote not beatefull
+//Briks are not correct colors
+//Briks are not correct potithion
+//Do not check all conors of the ball, only first
+//There are no comets
+//There are no file write.txt
+//
 public class Breakout extends WindowProgram {
     /**
      * Speed of the ball
      */
-    private double vx, vy;
+    private double vx;
+    private double vy = 3;
 
     public static final double PAUSE_TIME = 1000.0 / 48;
 
@@ -85,15 +92,21 @@ public class Breakout extends WindowProgram {
 
     //final
             int NTURNS = 3;
+    GRect brik;
+    GRect paddle;
+    GOval ball;
 
     public void run() {
         /* You fill this in, along with any subsidiary methods */
+
+
 //        setSize(WIDTH, HEIGHT);
         createBriks(NBRICKS_PER_ROW, NBRICK_ROWS);
-        // createPaddle();
+        createPaddle();
         addMouseListeners();
-        GOval ball = createBall();
+        ball = createBall();
         add(ball);
+        waitForClick();
         moveBall(ball);
 
     }
@@ -115,85 +128,76 @@ public class Breakout extends WindowProgram {
     }
 
     private void createBrik(int x, int y) {
-        GRect gRect = new GRect(
-                x+ 0,
-                y+ BRICK_Y_OFFSET,
+
+        brik = new GRect(
+                x + 0,
+                y + BRICK_Y_OFFSET,
                 BRICK_WIDTH,
                 BRICK_HEIGHT
         );
-        gRect.setFilled(true);
-        gRect.setColor(Color.RED);
-        add(gRect);
+        brik.setFilled(true);
+        brik.setColor(Color.RED);
+        add(brik);
 
     }
 
 
     private void moveBall(GOval ball) {
-        GRect gRect = new GRect(
-                getWidth() / 2 - PADDLE_WIDTH / 2,
-                getHeight() - PADDLE_Y_OFFSET - 10,
-                PADDLE_WIDTH,
-                PADDLE_HEIGHT);
-
-        gRect.setFilled(true);
-        gRect.setColor(Color.GREEN);
-        add(gRect);
-
         RandomGenerator rgen = RandomGenerator.getInstance();
         vx = rgen.nextDouble(1.0, 3.0);
-        vy = 3;
         if (rgen.nextBoolean(0.5))
             vx = -vx;
 
         while (NTURNS > 0) {
             ball.move(vx, vy);
             pause(PAUSE_TIME);
-
-            GObject collider = getCollidingObject(ball.getX(), ball.getY());
-
-            //     GObject collider = getCollidingObject();
-            if (collider == gRect) {
-
-
+            getCollidingObject(ball.getX(), ball.getY());
+            if (ball.getY() < 0) {
                 vy = -vy;
             }
+            checkBalX();
+            checkIfPlayerDropBallDown();
 
-            if (
-//                    ball.getY() > (getHeight() - BALL_RADIUS)
-//                    ||
-                    ball.getY() < 0
-            ) {
+        }
+    }
+
+    private void checkBalX() {
+        if (ball.getX() < 0
+                || (ball.getX() > getWidth() - BALL_RADIUS)) {
+            vx = -vx;
+        }
+    }
+
+    private void checkIfPlayerDropBallDown() {
+        if (ball.getY() > (getHeight() - BALL_RADIUS)) {
+            NTURNS = NTURNS - 1;
+            System.out.println(NTURNS);
+            ball.setLocation(
+                    getWidth()/2 - BALL_RADIUS/2,
+                    getHeight()/2 - BALL_RADIUS/2);
+
+            waitForClick();
+        }
+    }
+
+    private void getCollidingObject(double x, double y) {
+        GObject object = getElementAt(x, y);
+        if (object == paddle) {
+            vy = -vy;
+        } else {
+            try {
+                remove(object);
                 vy = -vy;
-            }
-            if (ball.getX() < 0
-                    || (ball.getX() > getWidth() - BALL_RADIUS)
-            ) {
-                vx = -vx;
-            }
-            if (ball.getY() > (getHeight() - BALL_RADIUS)) {
-                NTURNS = NTURNS - 1;
-                System.out.println(NTURNS);
+            } catch (Exception e) {
+
             }
         }
     }
 
 
-    private GObject getCollidingObject(double x, double y) throws NullPointerException {
-          GObject gObject =
-                  getElementAt(x, y);
-        //        chekAllPoints(x, y);
-        try {
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return gObject;
-
-    }
 
     private GObject chekAllPoints(double x, double y) {
-        GObject gObject  = getElementAt(x, y);
+        GObject gObject = getElementAt(x, y);
         return gObject;
 
 //        gObject = getElementAt(x+BALL_RADIUS, y);
@@ -209,7 +213,6 @@ public class Breakout extends WindowProgram {
         );
         gOval.setFilled(true);
         gOval.setColor(Color.RED);
-        //   add(gOval);
         return gOval;
     }
 
@@ -242,15 +245,15 @@ public class Breakout extends WindowProgram {
     }
 
     private void createPaddle() {
-        GRect gRect = new GRect(
+        paddle = new GRect(
                 getWidth() / 2 - PADDLE_WIDTH / 2,
                 getHeight() - PADDLE_Y_OFFSET - 10,
                 PADDLE_WIDTH,
                 PADDLE_HEIGHT);
 
-        gRect.setFilled(true);
-        gRect.setColor(Color.GREEN);
-        add(gRect);
+        paddle.setFilled(true);
+        paddle.setColor(Color.GREEN);
+        add(paddle);
 
 
     }

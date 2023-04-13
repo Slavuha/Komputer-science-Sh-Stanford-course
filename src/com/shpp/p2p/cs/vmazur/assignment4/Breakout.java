@@ -1,5 +1,6 @@
 package com.shpp.p2p.cs.vmazur.assignment4;
 
+import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GRect;
@@ -95,10 +96,10 @@ public class Breakout extends WindowProgram {
     GRect brik;
     GRect paddle;
     GOval ball;
-
+    GLabel label;
+    int coutOfBriks = NBRICKS_PER_ROW*NBRICK_ROWS;
     public void run() {
         /* You fill this in, along with any subsidiary methods */
-
 
 //        setSize(WIDTH, HEIGHT);
         createBriks(NBRICKS_PER_ROW, NBRICK_ROWS);
@@ -108,7 +109,30 @@ public class Breakout extends WindowProgram {
         add(ball);
         waitForClick();
         moveBall(ball);
+        createWinLable();
 
+    }
+
+    private void createWinLable() {
+        GLabel label = new GLabel("You win Bro!!!");
+        label.setColor(Color.GREEN);
+        label.setFont(new Font("Verdana", Font.PLAIN, 40));
+        label.setLocation(
+                getWidth()/2 - label.getWidth()/2,
+                getHeight()/2
+        );
+        add(label);
+    }
+
+    private void createLable() {
+
+        String str = String.valueOf(NTURNS);
+         label = new GLabel("You have got lifes" + str);
+        label.setColor(Color.BLUE);
+        label.setLocation(20,20);
+        add(label);
+        pause(777);
+        remove(label);
     }
 
     private void createBriks(int x, int y) {
@@ -128,9 +152,9 @@ public class Breakout extends WindowProgram {
     }
 
     private void createBrik(int x, int y) {
-
+        System.out.println(x);
         brik = new GRect(
-                x + 0,
+                x-(NBRICKS_PER_ROW),
                 y + BRICK_Y_OFFSET,
                 BRICK_WIDTH,
                 BRICK_HEIGHT
@@ -141,7 +165,6 @@ public class Breakout extends WindowProgram {
 
     }
 
-
     private void moveBall(GOval ball) {
         RandomGenerator rgen = RandomGenerator.getInstance();
         vx = rgen.nextDouble(1.0, 3.0);
@@ -151,13 +174,20 @@ public class Breakout extends WindowProgram {
         while (NTURNS > 0) {
             ball.move(vx, vy);
             pause(PAUSE_TIME);
-            getCollidingObject(ball.getX(), ball.getY());
-            if (ball.getY() < 0) {
-                vy = -vy;
-            }
+            getCollidingObject();
+            checkBalY();
             checkBalX();
             checkIfPlayerDropBallDown();
+            if (coutOfBriks<1){
+                break;
+            }
 
+        }
+    }
+
+    private void checkBalY() {
+        if (ball.getY() < 0) {
+            vy = -vy;
         }
     }
 
@@ -177,16 +207,31 @@ public class Breakout extends WindowProgram {
                     getHeight()/2 - BALL_RADIUS/2);
 
             waitForClick();
+            createLable();
+            if (NTURNS==0){
+                createFinishLable();
+            }
         }
     }
 
-    private void getCollidingObject(double x, double y) {
-        GObject object = getElementAt(x, y);
+    private void createFinishLable() {
+        GLabel label = new GLabel("GAME OVER!!! YOU LOSE!!!");
+        label.setColor(Color.ORANGE);
+        label.setLocation(getWidth()/2 - label.getWidth()/2,
+                getHeight()/2);
+        label.setFont( new Font("Verdana", Font.PLAIN, 18));
+        add(label);
+    }
+
+    private void getCollidingObject() {
+        GObject object = getElementAt(ball.getX(), ball.getY());
         if (object == paddle) {
             vy = -vy;
         } else {
             try {
                 remove(object);
+                coutOfBriks = coutOfBriks - 1;
+                System.out.println(coutOfBriks);
                 vy = -vy;
             } catch (Exception e) {
 

@@ -97,6 +97,7 @@ public class Breakout extends WindowProgram {
     GRect paddle;
     GOval ball;
     GLabel label;
+    int coutOfBriksFrom0 = 0;
     int coutOfBriks = NBRICKS_PER_ROW*NBRICK_ROWS;
     public void run() {
         /* You fill this in, along with any subsidiary methods */
@@ -109,8 +110,9 @@ public class Breakout extends WindowProgram {
         add(ball);
         waitForClick();
         moveBall(ball);
-        createWinLable();
-
+        if (coutOfBriks == 0) {
+            createWinLable();
+        }
     }
 
     private void createWinLable() {
@@ -145,22 +147,37 @@ public class Breakout extends WindowProgram {
 
     private void createBrikRow(int x, int y) {
         for (int i = 0; i < NBRICKS_PER_ROW; i++) {
-
             createBrik(x, y);
             x = x + BRICK_WIDTH + BRICK_SEP;
         }
     }
 
     private void createBrik(int x, int y) {
-        System.out.println(x);
         brik = new GRect(
                 x-(NBRICKS_PER_ROW),
                 y + BRICK_Y_OFFSET,
                 BRICK_WIDTH,
                 BRICK_HEIGHT
         );
+        coutOfBriksFrom0 = coutOfBriksFrom0+1;
         brik.setFilled(true);
-        brik.setColor(Color.RED);
+
+        if (coutOfBriksFrom0<=NBRICKS_PER_ROW*2){
+            brik.setColor(Color.RED);
+        }
+        else if (coutOfBriksFrom0<=NBRICKS_PER_ROW*4){
+            brik.setColor(Color.ORANGE);
+        }
+
+        else if (coutOfBriksFrom0<=NBRICKS_PER_ROW*6){
+            brik.setColor(Color.YELLOW);
+        }
+        else if (coutOfBriksFrom0<=NBRICKS_PER_ROW*8){
+            brik.setColor(Color.GREEN);
+        }
+        else {
+            brik.setColor(Color.CYAN);
+        }
         add(brik);
 
     }
@@ -198,10 +215,15 @@ public class Breakout extends WindowProgram {
         }
     }
 
+    /**
+     * Method check Y coordinate of the ball
+     * When the ball fall down we are losing 1 life
+     * After lost life method set locathion of the ball in the middle
+     *
+     */
     private void checkIfPlayerDropBallDown() {
         if (ball.getY() > (getHeight() - BALL_RADIUS)) {
             NTURNS = NTURNS - 1;
-            System.out.println(NTURNS);
             ball.setLocation(
                     getWidth()/2 - BALL_RADIUS/2,
                     getHeight()/2 - BALL_RADIUS/2);
@@ -209,6 +231,7 @@ public class Breakout extends WindowProgram {
             waitForClick();
             createLable();
             if (NTURNS==0){
+                remove(ball);
                 createFinishLable();
             }
         }

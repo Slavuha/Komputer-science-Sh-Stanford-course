@@ -9,9 +9,8 @@ import com.shpp.cs.a.graphics.WindowProgram;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+
 //kode wrote not beatefull
-//Briks are not correct colors
-//Briks are not correct potithion
 //Do not check all conors of the ball, only first
 //There are no comets
 //There are no file write.txt
@@ -22,7 +21,7 @@ public class Breakout extends WindowProgram {
      */
     private double vx;
     private double vy = 3;
-
+    //The time of the pause
     public static final double PAUSE_TIME = 1000.0 / 48;
 
     /**
@@ -51,7 +50,7 @@ public class Breakout extends WindowProgram {
     /**
      * Number of bricks per row
      */
-    private static final int NBRICKS_PER_ROW = 10;
+    private static final int NBRICKS_PER_ROW = 2;
 
     /**
      * Number of rows of bricks
@@ -88,17 +87,16 @@ public class Breakout extends WindowProgram {
     /**
      * Number of turns
      */
-    private
-    static
-
+    private static
     //final
             int NTURNS = 3;
-    GRect brik;
+    GRect brik; //Crate objects Brik, paddle, ball, label
     GRect paddle;
     GOval ball;
     GLabel label;
-    int coutOfBriksFrom0 = 0;
-    int coutOfBriks = NBRICKS_PER_ROW*NBRICK_ROWS;
+
+    int coutOfBriks = NBRICKS_PER_ROW * NBRICK_ROWS;
+
     public void run() {
         /* You fill this in, along with any subsidiary methods */
 
@@ -120,8 +118,8 @@ public class Breakout extends WindowProgram {
         label.setColor(Color.GREEN);
         label.setFont(new Font("Verdana", Font.PLAIN, 40));
         label.setLocation(
-                getWidth()/2 - label.getWidth()/2,
-                getHeight()/2
+                getWidth() / 2 - label.getWidth() / 2,
+                getHeight() / 2
         );
         add(label);
     }
@@ -129,9 +127,9 @@ public class Breakout extends WindowProgram {
     private void createLable() {
 
         String str = String.valueOf(NTURNS);
-         label = new GLabel("You have got lifes" + str);
+        label = new GLabel("You have got lifes" + str);
         label.setColor(Color.BLUE);
-        label.setLocation(20,20);
+        label.setLocation(20, 20);
         add(label);
         pause(777);
         remove(label);
@@ -151,35 +149,37 @@ public class Breakout extends WindowProgram {
             x = x + BRICK_WIDTH + BRICK_SEP;
         }
     }
+    //Create var coutOfBriksFrom0 to create right color.
+    int coutOfBriksFrom0= 0;
 
+    /**
+     * Simple creating Brik.
+     * @param x We use these parameters from pervier methods to correcting location of Brick.
+     * @param y
+     */
     private void createBrik(int x, int y) {
+
         brik = new GRect(
-                x-(NBRICKS_PER_ROW),
+                x - (NBRICKS_PER_ROW),
                 y + BRICK_Y_OFFSET,
                 BRICK_WIDTH,
                 BRICK_HEIGHT
         );
-        coutOfBriksFrom0 = coutOfBriksFrom0+1;
+        coutOfBriksFrom0 = coutOfBriksFrom0 + 1;
         brik.setFilled(true);
-
-        if (coutOfBriksFrom0<=NBRICKS_PER_ROW*2){
+        // This step we control color of bricks.
+        if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 2) {
             brik.setColor(Color.RED);
-        }
-        else if (coutOfBriksFrom0<=NBRICKS_PER_ROW*4){
+        } else if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 4) {
             brik.setColor(Color.ORANGE);
-        }
-
-        else if (coutOfBriksFrom0<=NBRICKS_PER_ROW*6){
+        } else if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 6) {
             brik.setColor(Color.YELLOW);
-        }
-        else if (coutOfBriksFrom0<=NBRICKS_PER_ROW*8){
+        } else if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 8) {
             brik.setColor(Color.GREEN);
-        }
-        else {
+        } else {
             brik.setColor(Color.CYAN);
         }
         add(brik);
-
     }
 
     private void moveBall(GOval ball) {
@@ -191,11 +191,15 @@ public class Breakout extends WindowProgram {
         while (NTURNS > 0) {
             ball.move(vx, vy);
             pause(PAUSE_TIME);
-            getCollidingObject();
+            getCollidingObject(0, 0);
+            getCollidingObject(BALL_RADIUS, 0);
+            getCollidingObject(0, BALL_RADIUS);
+            getCollidingObject(BALL_RADIUS, BALL_RADIUS);
+
             checkBalY();
             checkBalX();
             checkIfPlayerDropBallDown();
-            if (coutOfBriks<1){
+            if (coutOfBriks < 1) {
                 break;
             }
 
@@ -219,18 +223,17 @@ public class Breakout extends WindowProgram {
      * Method check Y coordinate of the ball
      * When the ball fall down we are losing 1 life
      * After lost life method set locathion of the ball in the middle
-     *
      */
     private void checkIfPlayerDropBallDown() {
         if (ball.getY() > (getHeight() - BALL_RADIUS)) {
             NTURNS = NTURNS - 1;
             ball.setLocation(
-                    getWidth()/2 - BALL_RADIUS/2,
-                    getHeight()/2 - BALL_RADIUS/2);
+                    getWidth() / 2 - BALL_RADIUS / 2,
+                    getHeight() / 2 - BALL_RADIUS / 2);
 
             waitForClick();
             createLable();
-            if (NTURNS==0){
+            if (NTURNS == 0) {
                 remove(ball);
                 createFinishLable();
             }
@@ -240,14 +243,14 @@ public class Breakout extends WindowProgram {
     private void createFinishLable() {
         GLabel label = new GLabel("GAME OVER!!! YOU LOSE!!!");
         label.setColor(Color.ORANGE);
-        label.setLocation(getWidth()/2 - label.getWidth()/2,
-                getHeight()/2);
-        label.setFont( new Font("Verdana", Font.PLAIN, 18));
+        label.setLocation(getWidth() / 2 - label.getWidth() / 2,
+                getHeight() / 2);
+        label.setFont(new Font("Verdana", Font.PLAIN, 18));
         add(label);
     }
 
-    private void getCollidingObject() {
-        GObject object = getElementAt(ball.getX(), ball.getY());
+    private void getCollidingObject(int x, int y) {
+        GObject object = getElementAt(ball.getX()+x, ball.getY()+y);
         if (object == paddle) {
             vy = -vy;
         } else {
@@ -261,7 +264,6 @@ public class Breakout extends WindowProgram {
             }
         }
     }
-
 
 
     private GObject chekAllPoints(double x, double y) {

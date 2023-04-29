@@ -162,7 +162,7 @@ public class Breakout extends WindowProgram {
     /**
      * The method creating row of bricks.
      * @param x
-     * @param y
+     * @param y 0
      */
     private void createBrickRow(int x, int y) {
         for (int i = 0; i < NBRICKS_PER_ROW; i++) {

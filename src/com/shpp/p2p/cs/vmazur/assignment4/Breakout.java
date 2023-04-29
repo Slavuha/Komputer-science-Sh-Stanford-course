@@ -1,11 +1,12 @@
 package com.shpp.p2p.cs.vmazur.assignment4;
-
+// 63% 2 h 30 8:18
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 import com.shpp.cs.a.graphics.WindowProgram;
+
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -21,7 +22,9 @@ public class Breakout extends WindowProgram {
      */
     private double vx;
     private double vy = 3;
-    //The time of the pause
+    /**
+     * The time of the pause
+     */
     public static final double PAUSE_TIME = 1000.0 / 48;
 
     /**
@@ -50,7 +53,7 @@ public class Breakout extends WindowProgram {
     /**
      * Number of bricks per row
      */
-    private static final int NBRICKS_PER_ROW = 2;
+    private static final int NBRICKS_PER_ROW = 10;
 
     /**
      * Number of rows of bricks
@@ -90,30 +93,36 @@ public class Breakout extends WindowProgram {
     private static
     //final
             int NTURNS = 3;
-    GRect brik; //Crate objects Brik, paddle, ball, label
+    /**
+     * Crate objects Brick, paddle, ball, label
+     */
+    GRect brick;
     GRect paddle;
     GOval ball;
     GLabel label;
 
-    int coutOfBriks = NBRICKS_PER_ROW * NBRICK_ROWS;
+    int countOfBricks = NBRICKS_PER_ROW * NBRICK_ROWS;
 
     public void run() {
         /* You fill this in, along with any subsidiary methods */
 
-//        setSize(WIDTH, HEIGHT);
-        createBriks(NBRICKS_PER_ROW, NBRICK_ROWS);
+        setSize(WIDTH, HEIGHT);
+        createAllBricksForGame(NBRICKS_PER_ROW, NBRICK_ROWS);
         createPaddle();
         addMouseListeners();
         ball = createBall();
         add(ball);
         waitForClick();
         moveBall(ball);
-        if (coutOfBriks == 0) {
-            createWinLable();
+        if (countOfBricks == 0) {
+            createWinLabel();
         }
     }
 
-    private void createWinLable() {
+    /**
+     * Method creating win label if player won game in case count of bricks are zero!
+     */
+    private void createWinLabel() {
         GLabel label = new GLabel("You win Bro!!!");
         label.setColor(Color.GREEN);
         label.setFont(new Font("Verdana", Font.PLAIN, 40));
@@ -124,7 +133,10 @@ public class Breakout extends WindowProgram {
         add(label);
     }
 
-    private void createLable() {
+    /**
+     * The method creating label with count of lives. After little pause this label removing.
+     */
+    private void createLabelWithCountsOfTurns() {
 
         String str = String.valueOf(NTURNS);
         label = new GLabel("You have got lifes" + str);
@@ -135,51 +147,64 @@ public class Breakout extends WindowProgram {
         remove(label);
     }
 
-    private void createBriks(int x, int y) {
-
+    /**
+     * The method creating all brick for game according to requirements of settings.
+     * @param x taking quantity of bricks per row from constanta.
+     * @param y taking quantity of rows in game from constanta.
+     */
+    private void createAllBricksForGame(int x, int y) {
         for (int i = 0; i < NBRICK_ROWS; i++) {
-            createBrikRow(x, y);
+            createBrickRow(x, y);
             y = y + BRICK_HEIGHT + BRICK_SEP;
         }
     }
 
-    private void createBrikRow(int x, int y) {
+    /**
+     * The method creating row of bricks.
+     * @param x
+     * @param y
+     */
+    private void createBrickRow(int x, int y) {
         for (int i = 0; i < NBRICKS_PER_ROW; i++) {
-            createBrik(x, y);
+            createBrick(x, y);
             x = x + BRICK_WIDTH + BRICK_SEP;
         }
     }
+
     //Create var coutOfBriksFrom0 to create right color.
-    int coutOfBriksFrom0= 0;
+    int coutOfBriksFrom0 = 0;
 
     /**
-     * Simple creating Brik.
+     * Simple creating Brick.
+     *
      * @param x We use these parameters from pervier methods to correcting location of Brick.
      * @param y
      */
-    private void createBrik(int x, int y) {
+    private void createBrick(int x, int y) {
 
-        brik = new GRect(
-                x - (NBRICKS_PER_ROW),
+        brick = new GRect(
+                x
+                        - (NBRICKS_PER_ROW)
+                ,
                 y + BRICK_Y_OFFSET,
                 BRICK_WIDTH,
                 BRICK_HEIGHT
         );
         coutOfBriksFrom0 = coutOfBriksFrom0 + 1;
-        brik.setFilled(true);
+        brick.setFilled(true);
         // This step we control color of bricks.
         if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 2) {
-            brik.setColor(Color.RED);
+            brick.setColor(Color.RED);
         } else if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 4) {
-            brik.setColor(Color.ORANGE);
+            brick.setColor(Color.ORANGE);
         } else if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 6) {
-            brik.setColor(Color.YELLOW);
+            brick.setColor(Color.YELLOW);
         } else if (coutOfBriksFrom0 <= NBRICKS_PER_ROW * 8) {
-            brik.setColor(Color.GREEN);
+            brick.setColor(Color.GREEN);
         } else {
-            brik.setColor(Color.CYAN);
+            brick.setColor(Color.CYAN);
         }
-        add(brik);
+        add(brick);
     }
 
     private void moveBall(GOval ball) {
@@ -199,7 +224,7 @@ public class Breakout extends WindowProgram {
             checkBalY();
             checkBalX();
             checkIfPlayerDropBallDown();
-            if (coutOfBriks < 1) {
+            if (countOfBricks < 1) {
                 break;
             }
 
@@ -232,7 +257,7 @@ public class Breakout extends WindowProgram {
                     getHeight() / 2 - BALL_RADIUS / 2);
 
             waitForClick();
-            createLable();
+            createLabelWithCountsOfTurns();
             if (NTURNS == 0) {
                 remove(ball);
                 createFinishLable();
@@ -250,14 +275,14 @@ public class Breakout extends WindowProgram {
     }
 
     private void getCollidingObject(int x, int y) {
-        GObject object = getElementAt(ball.getX()+x, ball.getY()+y);
+        GObject object = getElementAt(ball.getX() + x, ball.getY() + y);
         if (object == paddle) {
             vy = -vy;
         } else {
             try {
                 remove(object);
-                coutOfBriks = coutOfBriks - 1;
-                System.out.println(coutOfBriks);
+                countOfBricks = countOfBricks - 1;
+                System.out.println(countOfBricks);
                 vy = -vy;
             } catch (Exception e) {
 

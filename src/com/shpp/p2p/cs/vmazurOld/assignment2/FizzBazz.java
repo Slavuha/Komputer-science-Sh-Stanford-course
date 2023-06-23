@@ -1,10 +1,6 @@
-package com.shpp.p2p.cs.vmazur.assignment2;
+package com.shpp.p2p.cs.vmazurOld.assignment2;
 
 import com.shpp.cs.a.console.TextProgram;
-import com.shpp.cs.a.graphics.WindowProgram;
-
-import javax.swing.plaf.basic.BasicButtonUI;
-import java.io.*;
 
 public class FizzBazz extends TextProgram {
 //    public final int aaa = 0;

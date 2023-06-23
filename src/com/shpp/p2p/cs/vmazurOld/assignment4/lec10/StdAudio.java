@@ -1,4 +1,4 @@
-package com.shpp.p2p.cs.vmazur.assignment4.lec10; /**
+package com.shpp.p2p.cs.vmazurOld.assignment4.lec10; /**
  * This file is based on a modified version of http://introcs.cs.princeton.edu/java/stdlib/StdAudio.java.html
  */
 import java.io.File;

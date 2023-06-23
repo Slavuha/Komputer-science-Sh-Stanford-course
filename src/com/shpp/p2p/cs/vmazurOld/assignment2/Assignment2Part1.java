@@ -1,11 +1,11 @@
-package com.shpp.p2p.cs.vmazur.assignment2;
+package com.shpp.p2p.cs.vmazurOld.assignment2;
 
 import com.shpp.cs.a.console.TextProgram;
 
+/**
+ * This class is calculating square roots.
+ */
 public class Assignment2Part1 extends TextProgram {
-    /**
-     * This class is calculating square roots.
-     */
     public void run() {
         double a = readDouble("Enter first number");
         double b = readDouble("Enter second number");
@@ -37,5 +37,4 @@ public class Assignment2Part1 extends TextProgram {
             System.out.println("Roots are not real.");
         }
     }
-
 }

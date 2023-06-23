@@ -1,4 +1,4 @@
-package com.shpp.p2p.cs.vmazur.assignment3.lec08;
+package com.shpp.p2p.cs.vmazurOld.assignment3.lec08;
 
 import acm.graphics.GRect;
 import com.shpp.cs.a.graphics.WindowProgram;

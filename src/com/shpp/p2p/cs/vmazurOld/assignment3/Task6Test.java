@@ -1,10 +1,9 @@
-package com.shpp.p2p.cs.vmazur.assignment3;
+package com.shpp.p2p.cs.vmazurOld.assignment3;
 
 import acm.graphics.GRect;
 import com.shpp.cs.a.graphics.WindowProgram;
 
 import java.awt.*;
-import java.time.Duration;
 
 public class Task6Test extends WindowProgram {
     private static final double PAUSE_TIME = 1000.0 / 50;

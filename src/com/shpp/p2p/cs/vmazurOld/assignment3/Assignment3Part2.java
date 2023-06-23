@@ -1,4 +1,4 @@
-package com.shpp.p2p.cs.vmazur.assignment3;
+package com.shpp.p2p.cs.vmazurOld.assignment3;
 
 import com.shpp.cs.a.console.TextProgram;
 

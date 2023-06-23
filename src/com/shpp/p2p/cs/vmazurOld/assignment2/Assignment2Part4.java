@@ -1,4 +1,4 @@
-package com.shpp.p2p.cs.vmazur.assignment2;
+package com.shpp.p2p.cs.vmazurOld.assignment2;
 
 import acm.graphics.GLabel;
 import acm.graphics.GRect;

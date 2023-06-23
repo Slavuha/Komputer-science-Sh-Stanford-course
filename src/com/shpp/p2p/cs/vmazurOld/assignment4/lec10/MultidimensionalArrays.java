@@ -1,4 +1,4 @@
-package com.shpp.p2p.cs.vmazur.assignment4.lec10;
+package com.shpp.p2p.cs.vmazurOld.assignment4.lec10;
 /* A simple program showing off multidimensional arrays in Java. */
 
 import com.shpp.cs.a.console.TextProgram;

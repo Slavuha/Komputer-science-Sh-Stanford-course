@@ -1,4 +1,4 @@
-package com.shpp.p2p.cs.vmazur.assignment2;
+package com.shpp.p2p.cs.vmazurOld.assignment2;
 
 import acm.graphics.GOval;
 import com.shpp.cs.a.graphics.WindowProgram;

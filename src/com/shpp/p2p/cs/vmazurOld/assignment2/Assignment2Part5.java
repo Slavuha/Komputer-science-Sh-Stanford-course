@@ -21,6 +21,7 @@ public class Assignment2Part5 extends WindowProgram {
         drawFullBord(NUM_RECT_ROWS, NUM_RECT_IN_COL);
     }
 
+
     /**
      * Program draw full board
      * @param numRows
@@ -50,8 +51,9 @@ public class Assignment2Part5 extends WindowProgram {
      * @param colNumber
      */
     private void createRect( int rowNumber, int colNumber) {
-        GRect rect = new GRect(getWidth()/2-(BOX_SPACING+BOX_SIZE)* NUM_RECT_ROWS /2 + rowNumber,
-                getHeight()/2-(BOX_SPACING+BOX_SIZE)* NUM_RECT_IN_COL /2 + colNumber,
+        GRect rect = new GRect(
+        getWidth()/2-(BOX_SPACING+BOX_SIZE)* NUM_RECT_ROWS /2 + rowNumber,
+        getHeight()/2-(BOX_SPACING+BOX_SIZE)* NUM_RECT_IN_COL /2 + colNumber,
                 BOX_SIZE, BOX_SIZE);
         rect.setFilled(true);
         rect.setFillColor(Color.BLACK);

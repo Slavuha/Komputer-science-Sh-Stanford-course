@@ -11,8 +11,8 @@ import java.awt.*;
  */
 
 public class Assignment2Part4 extends WindowProgram {
-    private static final int RECT_WIGHT = 100;
-    private static final int RECT_HIGHT = 400;
+    private static final int RECT_WIGHT = 200;
+    private static final int RECT_HIGHT = 200;
 
     public void run() {
         createTheFlagOfOrangutaniya();
@@ -40,7 +40,7 @@ public class Assignment2Part4 extends WindowProgram {
         Color color = Color.green;
      //   boolean blue = true;
         int x = getWidth() / 2 - RECT_WIGHT - RECT_WIGHT / 2;
-        int y = getHeight() / 2 - RECT_HIGHT / 2;
+     //   int y = getHeight() / 2 - RECT_HIGHT / 2;
         for (int i = 0; i < 3; i++) {
 
             switch (i){
@@ -49,7 +49,7 @@ public class Assignment2Part4 extends WindowProgram {
                 case 2 -> color = Color.PINK;
 
             }
-            creteRect(x, y,
+            creteRect(x,
             //        blue
                     color
             );
@@ -64,13 +64,15 @@ public class Assignment2Part4 extends WindowProgram {
      * Create rect
      *
      * @param x
-     * @param y //* @param blue exclude two blue together
+     * //@param y //* @param blue exclude two blue together
      */
-    private void creteRect(int x, int y,
+    private void creteRect(int x,
                            //boolean blue
                            Color color
     )
+
     {
+        int y = getHeight() / 2 - RECT_HIGHT / 2;
         GRect rect = new GRect(
                 x,
                 y,

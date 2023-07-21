@@ -14,7 +14,7 @@ public class Assignment2Part6 extends WindowProgram {
         double x = 0;
         int y = 0;
         boolean up = true;
-        //Created this variable to control our caterpillar.
+        //        //Created this variable to control our caterpillar.
         for (int i = 0; i < LENGTH_OF_CATERPILLAR; i++) {
             createGOval((int) x, y);
             x = x + RADIUS_OF_CATERPILLAR / (1.5);

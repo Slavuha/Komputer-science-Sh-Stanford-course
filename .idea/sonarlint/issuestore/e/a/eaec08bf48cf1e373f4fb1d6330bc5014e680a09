@@ -1,0 +1,41 @@
+
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„–«¤øÿÿÿÿ
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„–«¤øÿÿÿÿ
+k	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²®ÃÒÿÿÿÿÿ
+k	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²®ÃÒÿÿÿÿÿ
+V
+java:S2184"@Cast one of the operands of this integer division to a "double".(Ö€§
+V
+java:S2184"@Cast one of the operands of this integer division to a "double".(Ö€§
+V
+java:S2184"@Cast one of the operands of this integer division to a "double".(·ª½›
+V
+java:S2184"@Cast one of the operands of this integer division to a "double".( Åô½
+[
+java:S2184"@Cast one of the operands of this integer division to a "double".(ÎÌü©øÿÿÿÿ
+V
+java:S2184"@Cast one of the operands of this integer division to a "double".( Åô½
+X
+java:S2184"BCast one of the operands of this division operation to a "double".(Ñûñ¹
+[
+java:S2184"@Cast one of the operands of this integer division to a "double".(ŒŠºÀøÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(†§Áõ
+j	java:S116"URename this field "HEAD_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤Üöß
+j	java:S116"VRename this field "HEAD_HEIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™ñí
+o	java:S116"URename this field "EYE_RADIUS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á±˜ÿşÿÿÿÿ
+p	java:S116"VRename this field "MOUTH_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âÔ½×ıÿÿÿÿ
+q	java:S116"WRename this field "MOUTH_HEIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÑÿÉ„ÿÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(¤Üöß
+6
+java:S1170"!Make this final field static too.(™ñí
+<
+java:S1170"!Make this final field static too.(Á±˜ÿşÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(âÔ½×ıÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(ÑÿÉ„ÿÿÿÿÿ
+P
+java:S1161":Add the "@Override" annotation above this method signature(“–ış
+M
+java:S1172-"2Remove this unused method parameter "eye_radius1".(²®ÃÒÿÿÿÿÿ

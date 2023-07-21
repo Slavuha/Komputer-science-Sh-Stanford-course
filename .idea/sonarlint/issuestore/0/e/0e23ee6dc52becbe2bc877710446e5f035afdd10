@@ -1,0 +1,12 @@
+
+[
+java:S2184."ECast one of the operands of this subtraction operation to a "double".(Ò§Ç
+X
+java:S2184/"BCast one of the operands of this addition operation to a "double".(„ö–ã
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‚ËŞÇûÿÿÿÿ
+t
+java:S3008"YRename this field "BRICKS_IN_BASE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£¾’šûÿÿÿÿ
+P
+java:S1161":Add the "@Override" annotation above this method signature(“–ış
+Q
+java:S2696#"6Make the enclosing method "static" or remove this set.(Å‚ƒğÿÿÿÿÿ

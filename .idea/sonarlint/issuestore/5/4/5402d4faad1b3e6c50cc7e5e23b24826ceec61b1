@@ -1,0 +1,18 @@
+
+{
+java:S1488§"_Immediately return this expression instead of assigning it to the temporary variable "gObject".(ßï³šıÿÿÿÿ
+a
+java:S2184°"ECast one of the operands of this subtraction operation to a "double".(ÖûšŒúÿÿÿÿ
+a
+java:S2184±"ECast one of the operands of this subtraction operation to a "double".(´Úòİûÿÿÿÿ
+\
+java:S2184Ø"ECast one of the operands of this subtraction operation to a "double".(¥£‰Ö
+a
+java:S2184Ù"ECast one of the operands of this subtraction operation to a "double".(Ç­¡Ôûÿÿÿÿ
+?	java:S108Ÿ")Either remove or fill this block of code.(”ı¾
+V
+java:S1161¾":Add the "@Override" annotation above this method signature(®î’×üÿÿÿÿ
+P
+java:S1161Ã":Add the "@Override" annotation above this method signature(®—ËF
+I
+java:S1144¦"2Remove this unused private "chekAllPoints" method.(¶¹×À

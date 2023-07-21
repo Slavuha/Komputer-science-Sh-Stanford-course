@@ -1,0 +1,12 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(šùá…øÿÿÿÿ
+=
+java:S2189Y""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ
+C
+java:S14811"(Remove this unused "red" local variable.(‚«‘ıÿÿÿÿ
+P
+java:S1161U":Add the "@Override" annotation above this method signature(“–ış
+L
+java:S1144"1Remove this unused private "makeSpectrum" method.(¸Ä…Œøÿÿÿÿ
+J
+java:S1144'"/Remove this unused private "disableRed" method.(Øõ¬ïüÿÿÿÿ

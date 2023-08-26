@@ -11,26 +11,22 @@ import java.awt.event.MouseEvent;
  * The program creates game Breakout.
  */
 public class Breakout extends WindowProgram {
+    // * The time of the pause
+    final double PAUSE_TIME = 1000.0 / 48;
+
     /**
      * Speed of the ball
      */
     private double vx;
     private double vy = 3;
-    // * The time of the pause
-    public static final double PAUSE_TIME = 1000.0 / 48;
+
     /**
      * /** Width and height of application window in pixels
      */
     public static final int APPLICATION_WIDTH = 400;
     public static final int APPLICATION_HEIGHT = 600;
 
-    /**
-     * Dimensions of game board (usually the same)
-     */
-    private static final int WIDTH = APPLICATION_WIDTH;
-    private static final int HEIGHT = APPLICATION_HEIGHT;
-
-    /**
+     /**
      * Dimensions of the paddle
      */
     private static final int PADDLE_WIDTH = 60;
@@ -54,13 +50,13 @@ public class Breakout extends WindowProgram {
     /**
      * Separation between bricks
      */
-    private static final int BRICK_SEP = 4;
+    private static final int BRICK_SEP = 5;
 
     /**
      * Width of a brick
      */
-    private static final int BRICK_WIDTH =
-            (WIDTH - (NBRICKS_PER_ROW - 1) * BRICK_SEP) / NBRICKS_PER_ROW;
+
+    private static final int WIDTH_OF_BRICK = APPLICATION_WIDTH / (NBRICKS_PER_ROW) - BRICK_SEP;;
 
     /**
      * Height of a brick
@@ -81,9 +77,7 @@ public class Breakout extends WindowProgram {
      * Number of turns
      */
 
-    private static
-    //final
-            int NTURNS = 3;
+    private static int NTURNS = 3;
     /**
      * Crate objects Brick, paddle, ball, label
      */
@@ -91,12 +85,15 @@ public class Breakout extends WindowProgram {
     GRect paddle;
     GOval ball;
     GLabel label;
+    //Create var count of bricks from 0 to create right color.
+    int countOfBricksFrom0 = 0;
 
     int countOfBricks = NBRICKS_PER_ROW * NBRICK_ROWS; //Global variable for count of bricks.
-
+    Color colorOfPaddle = Color.GREEN;
+    Color[]colorsOfBrics = {Color.RED, Color.YELLOW, Color.ORANGE, Color.GREEN, Color.CYAN};
     public void run() {
+
         /* You fill this in, along with any subsidiary methods */
-        setSize(WIDTH, HEIGHT);
         createPaddle();
         createAllBricksForGame(NBRICKS_PER_ROW, NBRICK_ROWS);
         addMouseListeners();
@@ -110,47 +107,44 @@ public class Breakout extends WindowProgram {
     }
 
 
-    private GObject selectedObject = null; //Local variable for object.
-    private double lastX = 0; //Local variable for remember last coordinate of the mouse.
+    /**
+     * Method move paddle, when user move mouse.
+     * @param mouseEvent - It is simple move of mouse.
+     */
+    public void mouseMoved(MouseEvent mouseEvent) {
 
-    //Method when user pressed at mouse.
-    //Program got coordinate of element.
-    public void mousePressed(MouseEvent e) {
-        selectedObject = getElementAt(e.getX(), e.getY());
-        lastX = e.getX();
-    }
+        double paddleX, paddleY;
 
-    //Method moves a paddle.
-    public void mouseDragged(MouseEvent e) {
-        if (selectedObject != null) {
-            double dx = e.getX() - lastX;
-            //Here program calculate if mouse located outside field.
-            if (selectedObject.getX() <= 0) {
-                dx = 0;
-                selectedObject.move(1, 0);
-            }
-            if (selectedObject.getX() >= getWidth() - selectedObject.getWidth()) {
-                dx = 0;
-                selectedObject.move(-1, 0);
-            }
-            selectedObject.move(dx, 0);
-            lastX = e.getX();
+        if ( (mouseEvent.getX()-PADDLE_WIDTH/2.0) < 0 ) {
+            paddleX = 0;
+        } else if ((getWidth() - mouseEvent.getX()) < PADDLE_WIDTH/2.0 ) {
+            paddleX = getWidth() - PADDLE_WIDTH;
+        } else {
+            paddleX = mouseEvent.getX()-PADDLE_WIDTH/2.00;
         }
-    }
+        paddleY = getHeight() - PADDLE_Y_OFFSET - PADDLE_HEIGHT;
+        paddle.setLocation(paddleX,paddleY);
+        add(paddle);
+       }
 
-    //Method creates a Paddle.
+
+    /**
+     * Method creates a Paddle
+     */
     private void createPaddle() {
         paddle = new GRect(
                 getWidth() / 2 - PADDLE_WIDTH / 2,
-                getHeight() - PADDLE_Y_OFFSET - 10,
+                getHeight() - PADDLE_Y_OFFSET,
                 PADDLE_WIDTH,
                 PADDLE_HEIGHT);
         paddle.setFilled(true);
-        paddle.setColor(Color.GREEN);
+        paddle.setColor(colorOfPaddle);
         add(paddle);
     }
 
-    //Method creates a ball.
+    /**
+     * Method creates a ball.
+     */
     private GOval createBall() {
         GOval gOval = new GOval(
                 getWidth() / 2 - BALL_RADIUS / 2,
@@ -162,8 +156,12 @@ public class Breakout extends WindowProgram {
         return gOval;
     }
 
-    //Method moves a ball.
+    /**
+     * Method creates a Paddle
+     * @param ball simple ball
+     */
     private void moveBall(GOval ball) {
+
         RandomGenerator rgen = RandomGenerator.getInstance();//Here program used random generator for changing direction of ball.
         vx = rgen.nextDouble(1.0, 3.0);
         if (rgen.nextBoolean(0.5))
@@ -173,8 +171,9 @@ public class Breakout extends WindowProgram {
             ball.move(vx, vy);
             pause(PAUSE_TIME);
             getCollidingObject(0, 0);
-            checkBalY();
-            checkBalX();
+            getCollidingObject(BALL_RADIUS, BALL_RADIUS);
+            changeBalY();
+            changeBalX();
             checkIfPlayerDropBallDown();
             if (countOfBricks < 1) {
                 break;
@@ -182,7 +181,9 @@ public class Breakout extends WindowProgram {
         }
     }
 
-    //Method creates win label.
+    /**
+     * Method creates win label.
+     */
     private void createWinLabel() {
         GLabel label = new GLabel("You win Bro!!!");
         label.setColor(Color.GREEN);
@@ -193,9 +194,12 @@ public class Breakout extends WindowProgram {
         add(label);
     }
 
-    //Method check colliding object.
+    /**
+     * Method check colliding object.
+     */
     private void getCollidingObject(int x, int y) {
         GObject object = getElementAt(ball.getX() + x, ball.getY() + y);
+        if (object !=null){
         if (object == paddle) {//If object is paddle  - ball change direction.
             vy = -vy;
         } else {//If object not paddle so brick program removes it.
@@ -205,19 +209,25 @@ public class Breakout extends WindowProgram {
                 System.out.println(countOfBricks);
                 vy = -vy;
             } catch (Exception e) {
-            }
+                System.out.println("Hello Vlad. We have got Exception");
+            }}
         }
     }
 
-    //Method checks ball Y coordinate. If ball colliding with wall ball change direction.
-    private void checkBalY() {
+
+    /**
+     *Method checks ball Y coordinate. If ball colliding with wall ball change direction.
+     */
+    private void changeBalY() {
         if (ball.getY() < 0) {
             vy = -vy;
         }
     }
 
-    //Method checks ball X coordinate. If ball colliding with wall ball change direction.
-    private void checkBalX() {
+    /**
+     * Method checks ball X coordinate. If ball colliding with wall ball change direction.
+     */
+    private void changeBalX() {
         if (ball.getX() < 0
                 || (ball.getX() > getWidth() - BALL_RADIUS)) {
             vx = -vx;
@@ -257,7 +267,9 @@ public class Breakout extends WindowProgram {
         remove(label);
     }
 
-    //Method creates finale label when you are lost.
+    /**
+     * Method creates finale label when you are lost.
+     */
     private void createFinishLable() {
         GLabel label = new GLabel("GAME OVER!!! YOU LOSE!!!");
         label.setColor(Color.ORANGE);
@@ -276,7 +288,7 @@ public class Breakout extends WindowProgram {
     private void createAllBricksForGame(int x, int y) {
         for (int i = 0; i < NBRICK_ROWS; i++) {
             createBrickRow(x, y);
-            y = y + BRICK_HEIGHT + BRICK_SEP;
+            y +=   (BRICK_HEIGHT + BRICK_SEP);
         }
     }
 
@@ -285,8 +297,9 @@ public class Breakout extends WindowProgram {
      */
     private void createBrickRow(int x, int y) {
         for (int i = 0; i < NBRICKS_PER_ROW; i++) {
-            createBrick(x, y);
-            x = x + BRICK_WIDTH + BRICK_SEP;
+            createBrick(x - (NBRICKS_PER_ROW),
+                    y+ BRICK_Y_OFFSET);
+            x = x + WIDTH_OF_BRICK + BRICK_SEP;
         }
     }
 
@@ -297,26 +310,21 @@ public class Breakout extends WindowProgram {
      */
     private void createBrick(int x, int y) {
         brick = new GRect(
-                x - (NBRICKS_PER_ROW),
-                y + BRICK_Y_OFFSET,
-                BRICK_WIDTH,
-                BRICK_HEIGHT);
+                x,y, WIDTH_OF_BRICK, BRICK_HEIGHT);
         countOfBricksFrom0 = countOfBricksFrom0 + 1;
         brick.setFilled(true);
         // This step we control color of bricks.
         if (countOfBricksFrom0 <= NBRICKS_PER_ROW * 2) {
-            brick.setColor(Color.RED);
+            brick.setColor(colorsOfBrics[0]);
         } else if (countOfBricksFrom0 <= NBRICKS_PER_ROW * 4) {
-            brick.setColor(Color.ORANGE);
+            brick.setColor(colorsOfBrics[1]);
         } else if (countOfBricksFrom0 <= NBRICKS_PER_ROW * 6) {
-            brick.setColor(Color.YELLOW);
+            brick.setColor(colorsOfBrics[2]);
         } else if (countOfBricksFrom0 <= NBRICKS_PER_ROW * 8) {
-            brick.setColor(Color.GREEN);
+            brick.setColor(colorsOfBrics[3]);
         } else {
-            brick.setColor(Color.CYAN);
+            brick.setColor(colorsOfBrics[4]);
         }
         add(brick);
     }
-    //Create var count of bricks from 0 to create right color.
-    int countOfBricksFrom0 = 0;
 }

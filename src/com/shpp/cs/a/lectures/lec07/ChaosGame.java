@@ -6,18 +6,27 @@ import acm.graphics.GRect;
 import acm.util.RandomGenerator;
 import com.shpp.cs.a.graphics.WindowProgram;
 
+import java.util.Arrays;
+
 public class ChaosGame  extends WindowProgram {
+
+
 
     public static final int DOTSCOUNT = 100000;
 
     public void run() {
         GPoint pt = new GPoint(0, 0);
+        int count = DOTSCOUNT;
 
 		/* Repeatedly move toward a corner and plot a pixel. */
-        while(true) {
+        while(count>555) {
             moveRandomly(pt);
             plotPixel(pt.getX(), pt.getY());
-            pause(500);
+            pause(5);
+            count--;
+
+            System.out.println(count);
+
         }
     }
 

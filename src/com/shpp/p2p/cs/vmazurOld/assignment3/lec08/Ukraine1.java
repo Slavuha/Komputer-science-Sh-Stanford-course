@@ -13,6 +13,11 @@ public class Ukraine1 extends WindowProgram {
     private static final String CITIES_FILE = "C:/Users/Мазури/IdeaProjects/Level 2/src/com/shpp/p2p/cs/vmazur/assignment3/lec08/shpp-cs-a-uacities-ptypes.txt";
 
     public void run() {
+
+    String word = readLine();
+    String revers = reversWord(word);
+        System.out.println(revers);
+
         try {
 			/* Open the file for reading. */
             BufferedReader br = new BufferedReader(new FileReader(CITIES_FILE));
@@ -36,6 +41,19 @@ public class Ukraine1 extends WindowProgram {
         } catch (IOException e) {
             println("How unpatriotic.");
         }
+    }
+
+    private String reversWord(String word) {
+        String testWord = "";
+
+        for (int i = 0; i<word.length(); i++){
+               char ch = word.charAt(i);
+
+                testWord = ch + testWord;
+        }
+
+
+        return testWord;
     }
 
     /**
